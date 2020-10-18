@@ -176,9 +176,15 @@ let stopGameUI = false;
 screen.key("r", (_ch, _key) => {
 	if (gameStarted) {
 		if (!game.isGameFinished) {
+			const { id, name, skipTurn } = game.getPlayerDetails();
+			if (skipTurn) {
+				logger.log(
+					`{blue-fg}> (${id}) ${name}'s{/blue-fg} turn is skipped because of two {red-fg}1 1{/red-fg}. Press r to acknowledge.`
+				);
+			}
 			game.rollDice();
 			table.setData(game.getCurrentScoreBoard());
-			logTurnRequest();
+			if (!skipTurn) logTurnRequest();
 			screen.render();
 		} else if (!stopGameUI) {
 			const data = game.finalScore();
