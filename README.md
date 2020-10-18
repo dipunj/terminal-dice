@@ -16,7 +16,7 @@ System Requirements
 ### Instructions to run
 
 To play the game, run the following, in project root:
-> node index --players=<num> --threshold=<num>
+> node index --players=&lt;num&gt; --threshold=&lt;num&gt;
 
 To show help menu:
 > node index --help
