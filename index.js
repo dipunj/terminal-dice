@@ -141,6 +141,15 @@ const logTurnRequest = () => {
 		// 	logString = `{blue-fg}> (${id}) ${name}'s{/blue-fg} will miss next turn. {red-fg}1 1{/red-fg}`;
 		// }
 	}
+	if (rollHistory.length >= 3) {
+		const { length } = rollHistory;
+		if (length >= 3) {
+			const { [length - 1]: last, [length - 2]: sLast, [length - 3]: tLast } = rollHistory;
+			if (last + sLast + tLast === 10) {
+				logString = `{blue-fg}> (${id}) ${name}'s{/blue-fg} turn again. {green-fg} Last 3 turns' Sum is 10{/green-fg}`;
+			}
+		}
+	}
 
 	table.scrollTo(game.nextTurn + 1);
 	table.select(game.nextTurn + 1);
@@ -188,9 +197,9 @@ screen.key("r", (_ch, _key) => {
 			screen.render();
 		} else if (!stopGameUI) {
 			const data = game.finalScore();
-			data[1][2] = `{red-fg}${data[1][2]}{/red-fg}`;
-			data[2][2] = `{blue-fg}${data[2][2]}{/blue-fg}`;
-			data[3][2] = `{yellow-fg}${data[3][2]}{/yellow-fg}`;
+			// data[1][2] = `{red-fg}${data[1][2]}{/red-fg}`;
+			// data[2][2] = `{blue-fg}${data[2][2]}{/blue-fg}`;
+			// data[3][2] = `{yellow-fg}${data[3][2]}{/yellow-fg}`;
 			table.setData(data);
 			logger.log("Game has ended");
 			stopGameUI = true;
